@@ -11,6 +11,18 @@ void bubble_sort(int a[], int n) {
         }
     }
 }
+void insertion(int a[],int n){
+    for(int i=1;i<n;i++){
+        int key=a[i];
+        int j=i-1;
+        
+        while (j>=0 && a[j] > key) {
+            a[j+1]=a[j];
+            j=j-1;
+        }
+        a[j+1]=key;
+    }
+}
 int main(){
     int array[]={23,17,45,8,11,56,67};
     bubble_sort(array,7);
