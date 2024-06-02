@@ -1,7 +1,9 @@
 import os
 import pandas as pd
 name=input("enter your name: ")
+#greet the user
 print("hello", name, "let's start!!\n")
+#create a dictionary so it's easy to convert into a dataframe.
 task={"task":[],"status":[]}
 print("1.enter the task\n2.print the tasks\n3.mark the task as completed\n4.save the file\n5.exit\nother.exit")
 while True:
