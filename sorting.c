@@ -1,5 +1,6 @@
 #include<stdio.h>
 //sorting in python is out of contxt as it's so simple.
+// here we check alternative terms and swap them for n iterations by reducing the no.of items to be sorted
 void bubble_sort(int a[], int n) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n-i-1; j++) {
@@ -11,6 +12,7 @@ void bubble_sort(int a[], int n) {
         }
     }
 }
+//here we assume the ith iteration of the loop has i sorted terms and insert new term in the appropriate place to remain sorted
 void insertion(int a[],int n){
     for(int i=1;i<n;i++){
         int key=a[i];
