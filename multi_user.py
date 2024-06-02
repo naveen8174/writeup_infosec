@@ -1,9 +1,11 @@
 import os
 import pandas as pd
 import getpass
+#for adding an user to this file.
 def adduser():
     username = input("Enter username: ")
     try:
+        # making sure that password is a 4 digit password.
         password = input("Enter 4 digit numeric password: ")
         if len(password) == 4 and password.isdigit():
             new_user = pd.DataFrame({"username": [username], "passwords": [int(password)]})
@@ -13,9 +15,10 @@ def adduser():
             print("Password must be a 4 digit number.")
     except ValueError:
         print("Enter numbers only")
-
+#for deleting the user for file
 def deluser():
     username = input("Enter username: ")
+    #defining the pswd_df for usage.
     global pswd_df
     if username in pswd_df["username"].values:
         pswd_df = pswd_df[pswd_df["username"] != username]
@@ -27,25 +30,31 @@ def deluser():
 # Check if password.csv exists and load or create the DataFrame
 if os.path.exists("password.csv"):
     pswd_df = pd.read_csv("password.csv")
+#if not exist create thefile with arbitary user u1,u2,u3, with passwords 1111,2222,3333.
 else:
     cred = {"username": ["u1", "u2", "u3"], "passwords": [1111, 2222, 3333]}
     pswd_df = pd.DataFrame(cred)
     pswd_df.to_csv("password.csv", index=False)
+print(" you may enter as a user u1 with password 1111")
 
-print("1. Add user\n2. Delete user\nOther. Pass")
-user_choice = input("Choose: ")
-if user_choice == '1':
-    adduser()
-elif user_choice == '2':
-    deluser()
-pswd_df = pd.read_csv("password.csv")
 username = input("Enter username: ")
 if username in pswd_df['username'].values:
+    #password is hidden while entering.
     passwd = int(getpass.getpass(f"Enter password of {username}: "))
     user_row = pswd_df[pswd_df['username'] == username]
+    #if credentials matcches properly.
     if not user_row.empty and user_row.iloc[0]['passwords'] == passwd:
         print(f"Hello, {username}, let's start!!\n")
-
+        print("1. Add user\n2. Delete user\nOther. go to to-do list")
+        user_choice = input("Choose: ")
+        #adding user
+        if user_choice == '1':
+            adduser()
+        #deleting user
+        elif user_choice == '2':
+            deluser()
+        #updating the password.csv file.
+        pswd_df = pd.read_csv("password.csv")
         task = {"task": [], "status": []}
         if os.path.exists("todo-list.csv"):
             task_df = pd.read_csv("todo-list.csv")
